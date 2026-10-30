@@ -1,0 +1,37 @@
+name: Web Project Automation
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get project files
+        uses: actions/checkout@v4
+
+      - name: Check HTML file
+        run: |
+          if [ -f index.html ]; then
+            echo "HTML file exists!"
+          else
+            echo "HTML file not found!"
+            exit 1
+          fi
+
+      - name: Check CSS file
+        run: |
+          if [ -f style.css ]; then
+            echo "CSS file exists!"
+          else
+            echo "CSS file not found!"
+            exit 1
+          fi
+
+      - name: Success message
+        run: echo "Web project check completed successfully!"
